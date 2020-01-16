@@ -44,17 +44,19 @@ function linkNodes (clNode, children) {
 }
 
 /**
- * 递归方法，清理类树
+ * 递归方法，建立清理类树的任务
  * */
 function clearNodeTree (node) {
+  // console.log('clear nodes', node.name, node.children.map(item => item.name))
   if (!node.children.length) {
     return
   }
   node.children.forEach(child => {
-    clearNodeTree(child)
     if (!child.name) {
-      child.dealEmptyNode(node)
+      child.pushDeleteTask(node)
     }
+
+    clearNodeTree(child)
   })
 }
 

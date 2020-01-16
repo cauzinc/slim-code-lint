@@ -1,10 +1,6 @@
 <template>
   <div class="container" :class="[{ 'first': false }, 'second']">
-    <div>
-      <div class="wrapper">
-        <div class="title">title</div>
-      </div>
-    </div>
+
     <div class="main-title">
       <div>
         <div class="flex-text">title</div>
@@ -29,7 +25,11 @@
       <span class="select-text">123</span>
       selector
     </div>
-
+    <div>
+      <div class="wrapper">
+        <div class="title">title</div>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -50,10 +50,6 @@
     display: inline-block;
     width: fit-content;
     background: #fff;
-  }
-
-  > div {
-    background: red;
   }
 }
 </style>

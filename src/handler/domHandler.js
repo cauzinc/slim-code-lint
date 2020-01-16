@@ -22,6 +22,7 @@ function generateDomClTree (root) {
  * */
 function generateFinalClassTree (classNode) {
   clearNodeTree(classNode)
+  classNode.executeDeleteTask()
 }
 
 

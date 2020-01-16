@@ -1,7 +1,10 @@
+let taskQueue = []
+
 module.exports = class ClassNode {
   constructor(name, source) {
     this.name = name
     this.source = source
+    this.redundant = false
     this.children = []
   }
   insertChild (nodeList) {
@@ -14,18 +17,27 @@ module.exports = class ClassNode {
       this.children.splice(index, 1)
     }
   }
-  // 遍历方法
-  walk () {
-
-  }
   /**
-   * 清除空节点
+   * 清除空节点，将任务推到一个待执行的队列中，不要在遍历的时候直接删除
    * @params parent 父节点
    * @params target 待清除的节点
    * */
-  dealEmptyNode (parent) {
-    parent.insertChild(this.children)
-    parent.deleteChild(this)
+  pushDeleteTask (parent) {
+    taskQueue.push({
+      parent,
+      child: this
+    })
+  }
+  /**
+   * 执行删除节点的任务
+   * */
+  executeDeleteTask () {
+    let task = taskQueue.reverse()
+    task.forEach(task => {
+      task.parent.insertChild(task.child.children)
+      task.parent.deleteChild(task.child)
+    })
+    taskQueue = []
   }
   // 合并节点
 
