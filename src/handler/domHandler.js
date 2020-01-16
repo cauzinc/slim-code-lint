@@ -6,7 +6,6 @@ function dealDomAst (ast) {
   return classTreeObj
 }
 
-
 class classNode {
   name: '',
   redundant: Boolean,
@@ -22,5 +21,10 @@ function dealBindingClass (bindingClass) {
   }
   // output ['a']
   return classList
+}
+
+export {
+  dealDomAst,
+  dealBindingClass
 }
 
