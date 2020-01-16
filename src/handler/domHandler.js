@@ -1,30 +1,36 @@
-function dealDomAst (ast) {
-  let classTreeObj = {}
-  // to do ...
-  node.bindingClass
-  node.staticClass
-  return classTreeObj
+let { createClassNode, linkNodes } = require('../core')
+
+function generateDomClTree (root) {
+  let clNodeTree = []
+  // 第一层作为根结点
+  let rootClNodeList = createClassNode(root)
+  clNodeTree.push(...rootClNodeList)
+
+  clNodeTree.forEach(node => {
+    linkNodes(node, root.children)
+  })
+
+  // console.log('clNodeTree', clNodeTree)
+  return clNodeTree
 }
 
-class classNode {
-  name: '',
-  redundant: Boolean,
-  children: [classNode]
-}
+// class classNode {
+//   name: '',
+//   redundant: Boolean,
+//   children: [classNode]
+// }
 
 function dealBindingClass (bindingClass) {
   // input "{ a: true }"
 
   let classList = []
-  if () {
 
-  }
   // output ['a']
   return classList
 }
 
-export {
-  dealDomAst,
+module.exports = {
+  generateDomClTree,
   dealBindingClass
 }
 

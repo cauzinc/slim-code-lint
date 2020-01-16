@@ -1,11 +1,19 @@
 <template>
   <div class="container" :class="[{ 'first': false }, 'second']">
-    <div class="wrapper" :class="{ 'clear-fix': true }">
+    <div class="wrapper wrapper-fixed" :class="{ 'clear-fix': true }">
       <div class="wrapper-item" :class="true ? '123' : '455'">123</div>
       <div class="wrapper-item" :class="'string'">123</div>
       <div class="wrapper-item" :class="`${ true ? '123' : '455' }`">123</div>
     </div>
-    <div class="selector">selector</div>
+    <div class="wrapper" :class="{ 'clear-fix': true }">
+      <div class="wrapper-item-2">123</div>
+      <div class="wrapper-item-2">123</div>
+      <div class="wrapper-item-2">123</div>
+    </div>
+    <div class="selector">
+      <span class="select-text">123</span>
+      selector
+    </div>
   </div>
 </template>
 
