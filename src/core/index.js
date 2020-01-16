@@ -1,3 +1,5 @@
+let ClassNode = require('./ClassNode')
+
 /**
  * 用ast node 来生成 classNode
  * @params node ast node
@@ -11,11 +13,7 @@ function createClassNode (node) {
   let classList = className.split(' ').filter(Boolean)
   let nodeList = []
   nodeList = classList.map(clName => {
-    return {
-      name: clName,
-      source: node,
-      children: []
-    }
+    return new ClassNode(clName, node)
   })
   return nodeList
 }
@@ -34,7 +32,7 @@ function linkNodes (clNode, children) {
   }
   children.forEach(node => {
     let nodeList = createClassNode(node)
-    clNode.children.push(...nodeList)
+    clNode.insertChild(nodeList)
   })
   clNode.children.forEach(node => {
     linkNodes(node, node.source.children)

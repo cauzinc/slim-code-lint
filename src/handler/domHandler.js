@@ -1,5 +1,8 @@
 let { createClassNode, linkNodes } = require('../core')
 
+/**
+* 生成class tree
+* */
 function generateDomClTree (root) {
   let clNodeTree = []
   // 第一层作为根结点
@@ -10,15 +13,8 @@ function generateDomClTree (root) {
     linkNodes(node, root.children)
   })
 
-  // console.log('clNodeTree', clNodeTree)
   return clNodeTree
 }
-
-// class classNode {
-//   name: '',
-//   redundant: Boolean,
-//   children: [classNode]
-// }
 
 function dealBindingClass (bindingClass) {
   // input "{ a: true }"

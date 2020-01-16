@@ -25,7 +25,7 @@
     display: flex;
     flex-direction: row;
     .wrapper-item {
-      broder: 1px solid #e8e8e8;
+      border: 1px solid #e8e8e8;
     }
   }
 
