@@ -1,5 +1,20 @@
 <template>
   <div class="container" :class="[{ 'first': false }, 'second']">
+    <div>
+      <div class="wrapper">
+        <div class="title">title</div>
+      </div>
+    </div>
+    <div class="main-title">
+      <div>
+        <div class="flex-text">title</div>
+        <div>
+          <span class="tip1">123</span>
+          <span class="tip2">456</span>
+        </div>
+      </div>
+    </div>
+
     <div class="wrapper wrapper-fixed" :class="{ 'clear-fix': true }">
       <div class="wrapper-item" :class="true ? '123' : '455'">123</div>
       <div class="wrapper-item" :class="'string'">123</div>
@@ -14,6 +29,8 @@
       <span class="select-text">123</span>
       selector
     </div>
+
+
   </div>
 </template>
 

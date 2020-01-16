@@ -4,7 +4,7 @@ const csstree = require('css-tree')
 const { compileTemplate, compileStyle, compileStyleAsync } = require('@vue/component-compiler-utils')
 const { createDefaultCompiler } = require('@vue/component-compiler')
 const instance = createDefaultCompiler()
-const { generateDomClTree } = require('./handler/domHandler')
+const { generateDomClTree, generateFinalClassTree } = require('./handler/domHandler')
 
 let compileVueFile = function (filePath) {
   return new Promise((resolve, reject) => {
@@ -23,7 +23,9 @@ compileVueFile('./test.vue').then(data => {
   styles = styles.filter(item => item.scoped)
   let template = data.template
 
-  let domClassTree = generateDomClTree(template.ast)
+  let domClassTreeList = generateDomClTree(template.ast)
+  domClassTreeList.forEach(item => { generateFinalClassTree(item) })
+
 
 
   let sourceCodeArr = styles.map(item => item.code)

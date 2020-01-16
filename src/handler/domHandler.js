@@ -1,7 +1,8 @@
-let { createClassNode, linkNodes } = require('../core')
+let { createClassNode, linkNodes, clearNodeTree } = require('../core')
 
 /**
 * 生成class tree
+ * @params root ast tree 的根结点
 * */
 function generateDomClTree (root) {
   let clNodeTree = []
@@ -16,6 +17,14 @@ function generateDomClTree (root) {
   return clNodeTree
 }
 
+/**
+ * 生成最终的树
+ * */
+function generateFinalClassTree (classNode) {
+  clearNodeTree(classNode)
+}
+
+
 function dealBindingClass (bindingClass) {
   // input "{ a: true }"
 
@@ -27,6 +36,7 @@ function dealBindingClass (bindingClass) {
 
 module.exports = {
   generateDomClTree,
+  generateFinalClassTree,
   dealBindingClass
 }
 
