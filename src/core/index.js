@@ -1,4 +1,5 @@
 let ClassNode = require('./ClassNode')
+let taskQueue = []
 
 /**
  * 用ast dom node 来生成 classNode
@@ -53,15 +54,39 @@ function clearNodeTree (node) {
   }
   node.children.forEach(child => {
     if (!child.name) {
-      child.pushDeleteTask(node)
+      pushDeleteTask(node, child)
     }
 
     clearNodeTree(child)
   })
 }
 
+/**
+ * 清除空节点，将任务推到一个待执行的队列中，不要在遍历的时候直接删除
+ * @params parent 父节点
+ * @params target 待清除的节点
+ * */
+function pushDeleteTask (parent, child) {
+  taskQueue.push({
+    parent,
+    child
+  })
+}
+
+/**
+ * 执行删除节点的任务
+ * */
+function executeDeleteTask () {
+  let task = taskQueue.reverse()
+  task.forEach(task => {
+    task.child.removedFromParent(task.parent)
+  })
+  taskQueue = []
+}
+
 module.exports = {
   createClassNode,
   linkNodes,
-  clearNodeTree
+  clearNodeTree,
+  executeDeleteTask
 }

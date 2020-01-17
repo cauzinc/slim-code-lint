@@ -1,4 +1,4 @@
-let { createClassNode, linkNodes, clearNodeTree } = require('../core')
+let { createClassNode, linkNodes, clearNodeTree, executeDeleteTask } = require('../core')
 
 /**
 * 生成class tree
@@ -22,7 +22,7 @@ function generateDomClTree (root) {
  * */
 function generateFinalClassTree (classNode) {
   clearNodeTree(classNode)
-  classNode.executeDeleteTask()
+  executeDeleteTask()
 }
 
 
