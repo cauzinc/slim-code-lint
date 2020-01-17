@@ -1,7 +1,14 @@
-const { createDefaultCompiler } = require('@vue/component-compiler')
+const { createClassNodeByCss, mergeClassTree } = require('../core')
 
-export default {
-  generateCssTree (code) {
-    return ''
-  }
+function getFinalCssTree (originCssAst) {
+  let classTreeList = createClassNodeByCss(originCssAst)
+  classTreeList.forEach(tree => {
+    mergeClassTree(tree)
+  })
+  return classTreeList
+}
+
+
+module.exports = {
+  getFinalCssTree
 }

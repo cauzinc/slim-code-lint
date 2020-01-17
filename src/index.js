@@ -4,7 +4,10 @@ const csstree = require('css-tree')
 const { compileTemplate, compileStyle, compileStyleAsync } = require('@vue/component-compiler-utils')
 const { createDefaultCompiler } = require('@vue/component-compiler')
 const instance = createDefaultCompiler()
-const { generateDomClTree, generateFinalClassTree, mergeDomTree } = require('./handler/domHandler')
+const { generateDomClTree, generateFinalClassTree } = require('./handler/domHandler')
+const { getFinalCssTree } = require('./handler/cssHandler')
+
+const { mergeClassTree } = require('./core/index')
 
 let compileVueFile = function (filePath) {
   return new Promise((resolve, reject) => {
@@ -26,19 +29,19 @@ compileVueFile('./test.vue').then(data => {
   let domClassTreeList = generateDomClTree(template.ast)
   domClassTreeList.forEach(item => {
     generateFinalClassTree(item)
-    mergeDomTree(item)
+    mergeClassTree(item)
   })
 
 
 
   let sourceCodeArr = styles.map(item => item.code)
   let cssAst = csstree.parse(sourceCodeArr[0])
-  let astTree = csstree.toPlainObject(cssAst)
+  let plainCssAstObj = csstree.toPlainObject(cssAst)
+  let cssTreeList = getFinalCssTree(plainCssAstObj)
 
-  // console.log('template', template)
 
   // console.log('primitive style', styles[0])
-  // console.log('--------------------------')
+  console.log('--------------------------')
   // console.log('source code', sourceCodeArr[0])
   // console.log('plain obj', astTree)
 })

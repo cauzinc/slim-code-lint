@@ -12,11 +12,11 @@
     </div>
 
     <div class="wrapper wrapper-fixed" :class="{ 'clear-fix': true }">
-      <div class="wrapper-item" :class="true ? '123' : '455'">123</div>
-      <div class="wrapper-item" :class="'string'">123</div>
-      <div class="wrapper-item" :class="`${ true ? '123' : '455' }`">123</div>
+      <div class="wrapper-item">123</div>
+      <div class="wrapper-item">123</div>
+      <div class="wrapper-item">123</div>
     </div>
-    <div class="wrapper" :class="{ 'clear-fix': true }">
+    <div class="wrapper">
       <div class="wrapper-item-2">123</div>
       <div class="wrapper-item-2">123</div>
       <div class="wrapper-item-2">123</div>
@@ -37,6 +37,23 @@
 <style lang='scss' scoped>
 .container {
   width: 100px;
+
+  .main-title {
+    margin: 20px auto;
+    .flex-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tip {
+      color: #333;
+    }
+    .tip1 {
+      font-size: 20px;
+      color: #333;
+    }
+  }
+
   .wrapper {
     height: 100%;
     display: flex;
@@ -44,12 +61,19 @@
     .wrapper-item {
       border: 1px solid #e8e8e8;
     }
+    .wrapper-item2 {
+      border: 2px solid #e8e8e8;
+    }
   }
 
   .selector {
     display: inline-block;
     width: fit-content;
     background: #fff;
+    .select-text {
+      font-size: 14px;
+      color: #eee;
+    }
   }
 }
 </style>
