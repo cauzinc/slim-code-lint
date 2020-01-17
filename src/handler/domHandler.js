@@ -18,6 +18,27 @@ function generateDomClTree (root) {
 }
 
 /**
+ * 对dom class树进行合并操作, 将相同的节点进行合并
+ * */
+function mergeDomTree (node) {
+  let layer = node.children
+  if (!layer || !layer.length) {
+    return
+  }
+  let newLayer = []
+  layer.forEach(item => {
+    let sameNode = newLayer.find(t => t.name === item.name)
+    if (sameNode) {
+      sameNode.children.push(...item.children)
+    } else {
+      newLayer.push(item)
+    }
+  })
+  node.children = newLayer
+  node.children.forEach(item => mergeDomTree(item))
+}
+
+/**
  * 生成最终的树
  * */
 function generateFinalClassTree (classNode) {
@@ -38,6 +59,7 @@ function dealBindingClass (bindingClass) {
 module.exports = {
   generateDomClTree,
   generateFinalClassTree,
+  mergeDomTree,
   dealBindingClass
 }
 

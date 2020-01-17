@@ -33,7 +33,7 @@ function linkNodes (clNode, children) {
   // 只处理element类型的节点
   let availableChild = children.filter(item => item.type === 1)
   if (!availableChild.length) {
-    return
+    return{}
   }
   availableChild.forEach(node => {
     let nodeList = createClassNode(node)
@@ -83,6 +83,8 @@ function executeDeleteTask () {
   })
   taskQueue = []
 }
+
+
 
 module.exports = {
   createClassNode,

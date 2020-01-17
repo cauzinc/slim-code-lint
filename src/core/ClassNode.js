@@ -1,9 +1,9 @@
-let taskQueue = []
-
 module.exports = class ClassNode {
   constructor(name, source) {
     this.name = name
     this.source = source
+    // 合并后也要维护一个被合并的dom的原始node list
+    this.mergedList = []
     this.redundant = false
     this.children = []
   }
