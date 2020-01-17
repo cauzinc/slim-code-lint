@@ -5,23 +5,28 @@
       <div>
         <div class="flex-text">title</div>
         <div>
-          <span class="tip1">123</span>
-          <span class="tip2">456</span>
+          <span class="tip1">
+            <span class="tip">123</span>
+          </span>
+          <span class="tip2">
+            <span class="tip">456</span>
+          </span>
         </div>
       </div>
     </div>
 
     <div class="wrapper wrapper-fixed" :class="{ 'clear-fix': true }">
-      <div class="wrapper-item">123</div>
-      <div class="wrapper-item">123</div>
-      <div class="wrapper-item">123</div>
+      <div class="wrapper-item">item-1</div>
+      <div class="wrapper-item">item-2</div>
+      <div class="wrapper-item">item-3</div>
     </div>
     <div class="wrapper">
-      <div class="wrapper-item-2">123</div>
-      <div class="wrapper-item-2">123</div>
-      <div class="wrapper-item-2">123</div>
+      <div class="wrapper-item-2">sub-item-1</div>
+      <div class="wrapper-item-2">sub-item-2</div>
+      <div class="wrapper-item-2">sub-item-3</div>
     </div>
     <div class="selector">
+      <span class="select-dot">123</span>
       <span class="select-text">123</span>
       selector
     </div>
@@ -37,6 +42,12 @@
 <style lang='scss' scoped>
 .container {
   width: 100px;
+
+  .group {
+    .group-item {
+      background: #333;
+    }
+  }
 
   .main-title {
     margin: 20px auto;
@@ -63,6 +74,9 @@
     }
     .wrapper-item2 {
       border: 2px solid #e8e8e8;
+      .item-text {
+
+      }
     }
   }
 
@@ -73,6 +87,11 @@
     .select-text {
       font-size: 14px;
       color: #eee;
+      .select-dot {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
     }
   }
 }

@@ -36,7 +36,7 @@ function createClassNodeByCss (styleSheetNode) {
     let classList = selectorList.filter(item => item.type === 'ClassSelector')
     // 生成classNodeList
     let classNodeList = classList.map(cl => new ClassNode(cl.name))
-    console.log('classList', classNodeList.map(item => item.name))
+    // console.log('classList', classNodeList.map(item => item.name))
     // 组成classNodeTree
     classNodeList.length && classNodeList.reduce((acc, crtVal) => {
       if (acc && acc instanceof ClassNode) {
@@ -48,7 +48,8 @@ function createClassNodeByCss (styleSheetNode) {
     // 如果有一样的tree要直接merge
     let sameTree = cssClassTreeList.find(item => item.name === classNodeTree.name)
     if (sameTree) {
-      sameTree.children.push(...classNodeTree.children)
+      sameTree.insertChild(classNodeTree.children)
+      // sameTree.children.push(...classNodeTree.children)
     } else {
       cssClassTreeList.push(classNodeTree)
     }
@@ -106,7 +107,8 @@ function mergeClassTree (node) {
   layer.forEach(item => {
     let sameNode = newLayer.find(t => t.name === item.name)
     if (sameNode) {
-      sameNode.children.push(...item.children)
+      sameNode.insertChild(item.children)
+      // sameNode.children.push(...item.children)
     } else {
       newLayer.push(item)
     }
@@ -137,7 +139,6 @@ function executeDeleteTask () {
   })
   taskQueue = []
 }
-
 
 
 module.exports = {

@@ -2,6 +2,7 @@ module.exports = class ClassNode {
   constructor(name, source) {
     this.name = name
     this.source = source || {}
+    this.parent = null
     // 合并后也要维护一个被合并的dom的原始node list
     this.mergedList = []
     this.redundant = false
@@ -10,6 +11,9 @@ module.exports = class ClassNode {
   insertChild (nodeList) {
     let list = nodeList.filter(item => item instanceof ClassNode)
     this.children.push(...list)
+    this.children.forEach(node => {
+      node.parent = this
+    })
   }
   deleteChild (node) {
     let index = this.children.findIndex(item => item === node)
@@ -24,7 +28,15 @@ module.exports = class ClassNode {
     parent.insertChild(this.children)
     parent.deleteChild(this)
   }
-
-  // 合并节点
-
+  /**
+   * 遍历方法
+   * */
+  walk (callback) {
+    if (this) {
+      callback(this)
+    }
+    this.children.length && this.children.forEach(child => {
+      child.walk(callback)
+    })
+  }
 }

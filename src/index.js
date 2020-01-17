@@ -5,7 +5,7 @@ const { compileTemplate, compileStyle, compileStyleAsync } = require('@vue/compo
 const { createDefaultCompiler } = require('@vue/component-compiler')
 const instance = createDefaultCompiler()
 const { generateDomClTree, generateFinalClassTree } = require('./handler/domHandler')
-const { getFinalCssTree } = require('./handler/cssHandler')
+const { getFinalCssTree, trimCssTreeByDomTree } = require('./handler/cssHandler')
 
 const { mergeClassTree } = require('./core/index')
 
@@ -38,6 +38,7 @@ compileVueFile('./test.vue').then(data => {
   let cssAst = csstree.parse(sourceCodeArr[0])
   let plainCssAstObj = csstree.toPlainObject(cssAst)
   let cssTreeList = getFinalCssTree(plainCssAstObj)
+  trimCssTreeByDomTree(cssTreeList[0], domClassTreeList[0])
 
 
   // console.log('primitive style', styles[0])
