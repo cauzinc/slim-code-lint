@@ -12,6 +12,7 @@ function printResult (list) {
       log(errorLine(line.map(step => `.${step}`).join(' ')))
     })
   }
+  log('')
 }
 
 module.exports = {
