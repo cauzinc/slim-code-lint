@@ -11,7 +11,34 @@ function getFinalCssTree (originCssAst) {
 function trimCssTreeByDomTree (cssTree, domTree) {
   let cssPathList = getTreePathList(cssTree)
   let domPathList = getTreePathList(domTree)
-  console.log('path list', domPathList)
+  // console.log('css path', cssPathList)
+  // console.log('----------------------')
+  // console.log('dom path', domPathList)
+  // console.log('----------------------')
+  let redundantClassList = []
+  cssPathList.forEach((path, index) => {
+    // 标记每个css step对应的dom path step
+    for (let i = 0; i < domPathList.length; i++) {
+      let crtPath = 0
+      let crtIndex = 0
+      let domPath = domPathList[i]
+      crtIndex = domPath.findIndex(step => path[crtPath] === step)
+      crtPath++
+      while (crtIndex > -1 && path[crtPath]) {
+        let nextPath = domPath.slice(crtIndex)
+        crtIndex = nextPath.findIndex(step => path[crtPath] === step)
+        crtPath++
+      }
+      // 如果当前css path遍历完成，且有找到最后一个css step 对应的 dom step，那么css branch是需要的，否则就需要removed
+      if (!path[crtPath] && crtIndex >= 0) {
+        break
+      }
+      if (i === domPathList.length - 1) {
+        redundantClassList.push(path)
+      }
+    }
+  })
+  return redundantClassList
 }
 
 /**

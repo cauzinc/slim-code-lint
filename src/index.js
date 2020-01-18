@@ -38,11 +38,12 @@ compileVueFile('./test.vue').then(data => {
   let cssAst = csstree.parse(sourceCodeArr[0])
   let plainCssAstObj = csstree.toPlainObject(cssAst)
   let cssTreeList = getFinalCssTree(plainCssAstObj)
-  trimCssTreeByDomTree(cssTreeList[0], domClassTreeList[0])
+  let finalResult = trimCssTreeByDomTree(cssTreeList[0], domClassTreeList[0])
 
 
   // console.log('primitive style', styles[0])
   console.log('--------------------------')
+  console.log('result', finalResult)
   // console.log('source code', sourceCodeArr[0])
   // console.log('plain obj', astTree)
 })
