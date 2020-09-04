@@ -12,7 +12,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "css-tree": "^1.0.0-alpha.39",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "vue-component-loader": "^1.1.3"
   },
   "devDependencies": {
